@@ -78,7 +78,7 @@ namespace FlowFields
             particleHolder.MoveParticles(flowField, 1);
             Bitmap bmp = (Bitmap)baseBmp.Clone();
             if (!checkBox2.Checked) bmp = new Bitmap(pictureBox1.Image);
-            particleHolder.RenderParticles(ref bmp, 3, Color.Red);
+            particleHolder.RenderParticles(ref bmp);
             pictureBox1.Image = bmp;
         }
 

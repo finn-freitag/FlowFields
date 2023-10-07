@@ -7,42 +7,29 @@ using System.Threading.Tasks;
 
 namespace FlowFields
 {
-    public class SimpleParticleHolder
+    public class SimpleParticleHolder : ParticleHolder
     {
-        public PointF[] particles;
+        public double Radius = 3;
+        public Color Color = Color.Red;
 
-        public readonly int Width;
-        public readonly int Height;
 
-        public SimpleParticleHolder(int particleCount, int Width, int Height)
+        public SimpleParticleHolder(int particleCount, int Width, int Height) : base(Width, Height)
         {
-            this.Width = Width;
-            this.Height = Height;
-            particles = new PointF[particleCount];
+            particles = new List<PointF>();
             for (int i = 0; i < particleCount; i++)
             {
-                particles[i] = new PointF((float)Random.Get(Width), (float)Random.Get(Height));
+                particles.Add(new PointF((float)Random.Get(Width), (float)Random.Get(Height)));
             }
         }
 
-        public void MoveParticles(FlowField flowField, double speed)
-        {
-            for(int i = 0; i < particles.Length; i++)
-            {
-                particles[i] = particles[i] + flowField.vectorField[(int)particles[i].X, (int)particles[i].Y] * speed;
-                particles[i].X = (particles[i].X + Width) % Width;
-                particles[i].Y = (particles[i].Y + Height) % Height;
-            }
-        }
-
-        public void RenderParticles(ref Bitmap bmp, double radius, Color color)
+        public override void RenderParticles(ref Bitmap bmp)
         {
             Graphics g = Graphics.FromImage(bmp);
-            Brush b = new SolidBrush(color);
-            float width = (float)(2 * radius);
-            for(int i = 0; i < particles.Length; i++)
+            Brush b = new SolidBrush(Color);
+            float width = (float)(2 * Radius);
+            for(int i = 0; i < particles.Count; i++)
             {
-                g.FillEllipse(b, (float)(particles[i].X - radius), (float)(particles[i].Y - radius), width, width);
+                g.FillEllipse(b, (float)(particles[i].X - Radius), (float)(particles[i].Y - Radius), width, width);
             }
         }
     }

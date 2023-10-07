@@ -14,7 +14,7 @@ namespace FlowFields
     public partial class PerlinForm : Form
     {
         PerlinNoiseFlowField flowField;
-        SimpleParticleHolder particleHolder;
+        ParticleHolder particleHolder;
         Bitmap baseBmp = null;
 
         Timer timer;
@@ -31,24 +31,24 @@ namespace FlowFields
 
             Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             Graphics g = Graphics.FromImage(bmp);
-            g.Clear(Color.Black);
+            g.Clear(Color.White);
             g.Flush();
             g.Dispose();
-            flowField.RenderFlowVectorsToBitmap(ref bmp, 10, Color.White);
+            //flowField.RenderFlowVectorsToBitmap(ref bmp, 10, Color.White);
             pictureBox1.Image = bmp;
             baseBmp = bmp;
 
-            particleHolder = new SimpleParticleHolder(300, pictureBox1.Width, pictureBox1.Height);
+            particleHolder = new SmoothParticleHolder(300, pictureBox1.Width, pictureBox1.Height);
 
             timer = new Timer();
             timer.Enabled = false;
-            timer.Interval = 100;
+            timer.Interval = 50;
             timer.Tick += Timer_Tick;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            makeStep();
+            for (int i = 0; i < 10; i++) makeStep();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -61,7 +61,7 @@ namespace FlowFields
             particleHolder.MoveParticles(flowField, 1);
             Bitmap bmp = (Bitmap)baseBmp.Clone();
             if (!checkBox2.Checked) bmp = new Bitmap(pictureBox1.Image);
-            particleHolder.RenderParticles(ref bmp, 3, Color.Red);
+            particleHolder.RenderParticles(ref bmp);
             pictureBox1.Image = bmp;
         }
 
