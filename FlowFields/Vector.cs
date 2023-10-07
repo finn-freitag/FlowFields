@@ -57,5 +57,10 @@ namespace FlowFields
         {
             return new Vector(a.x * b, a.y * b);
         }
+
+        public static PointF operator +(PointF a, Vector b)
+        {
+            return new PointF(a.X + (float)b.x, a.Y + (float)b.y);
+        }
     }
 }

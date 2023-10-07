@@ -19,5 +19,10 @@ namespace FlowFields
         {
             return r.NextDouble();
         }
+
+        public static double Get(double max)
+        {
+            return Get() * max;
+        }
     }
 }
