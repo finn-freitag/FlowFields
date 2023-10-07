@@ -2,48 +2,31 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace FlowFields
 {
-    public partial class MainWindow : Form
+    public partial class PerlinForm : Form
     {
-        GravityPointFlowField flowField;
+        PerlinNoiseFlowField flowField;
         SimpleParticleHolder particleHolder;
         Bitmap baseBmp = null;
 
         Timer timer;
 
-        public MainWindow()
+        public PerlinForm()
         {
             InitializeComponent();
         }
 
-        private void MainWindow_Shown(object sender, EventArgs e)
+        private void PerlinForm_Shown(object sender, EventArgs e)
         {
-            flowField = new GravityPointFlowField(pictureBox1.Width, pictureBox1.Height);
-            flowField.DefaultAngle = 180;
-            FlowDirection fd = new FlowDirection();
-            fd.Position = new Vector(200, 200);
-            fd.Flow = new AngleVector(90, 100);
-            flowField.Items.Add(fd);
-            FlowDirection fd2 = new FlowDirection();
-            fd2.Position = new Vector(400, 400);
-            fd2.Flow = new AngleVector(90, 100);
-            flowField.Items.Add(fd2);
-            GravityPoint gp = new GravityPoint();
-            gp.Position = new Vector(200, 400);
-            gp.Radius = 100;
-            flowField.Items.Add(gp);
-            TangentGravityPoint tgp = new TangentGravityPoint();
-            tgp.Position = new Vector(400, 200);
-            tgp.Radius = 100;
-            flowField.Items.Add(tgp);
+            flowField = new PerlinNoiseFlowField(pictureBox1.Width, pictureBox1.Height);
             flowField.RenderFlowVectors();
 
             Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);

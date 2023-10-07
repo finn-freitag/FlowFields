@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace FlowFields
 {
-    public class ParticleHolder
+    public class SimpleParticleHolder
     {
         public PointF[] particles;
 
         public readonly int Width;
         public readonly int Height;
 
-        public ParticleHolder(int particleCount, int Width, int Height)
+        public SimpleParticleHolder(int particleCount, int Width, int Height)
         {
             this.Width = Width;
             this.Height = Height;
