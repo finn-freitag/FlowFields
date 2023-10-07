@@ -34,7 +34,7 @@ namespace FlowFields
             flowField.Items.Add(fd);
             FlowDirection fd2 = new FlowDirection();
             fd2.Position = new Vector(400, 400);
-            fd2.Flow = new AngleVector(270, 100);
+            fd2.Flow = new AngleVector(90, 100);
             flowField.Items.Add(fd2);
             GravityPoint gp = new GravityPoint();
             gp.Position = new Vector(200, 400);
@@ -55,7 +55,7 @@ namespace FlowFields
             pictureBox1.Image = bmp;
             baseBmp = bmp;
 
-            particleHolder = new ParticleHolder(100, pictureBox1.Width, pictureBox1.Height);
+            particleHolder = new ParticleHolder(300, pictureBox1.Width, pictureBox1.Height);
 
             timer = new Timer();
             timer.Enabled = false;
@@ -65,16 +65,19 @@ namespace FlowFields
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            particleHolder.MoveParticles(flowField, 1);
-            Bitmap bmp = (Bitmap)baseBmp.Clone();
-            particleHolder.RenderParticles(ref bmp, 3, Color.Red);
-            pictureBox1.Image = bmp;
+            makeStep();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            makeStep();
+        }
+
+        private void makeStep()
+        {
             particleHolder.MoveParticles(flowField, 1);
             Bitmap bmp = (Bitmap)baseBmp.Clone();
+            if (!checkBox2.Checked) bmp = new Bitmap(pictureBox1.Image);
             particleHolder.RenderParticles(ref bmp, 3, Color.Red);
             pictureBox1.Image = bmp;
         }

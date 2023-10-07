@@ -24,7 +24,7 @@ namespace FlowFields
 
         public static AngleVector GetRandomNormalizedVector()
         {
-            return new AngleVector(Random.Get(), 1);
+            return new AngleVector(Random.Get(360), 1);
         }
 
         public static explicit operator AngleVector(double angle)
