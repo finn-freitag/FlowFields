@@ -26,7 +26,7 @@ namespace FlowFields
                 direction.length = 1;
                 flow = flow.Normalize();
                 double gravity = Gravity(distance, Radius);
-                return (Vector)direction * gravity + flow * (1 - gravity);
+                return (Vector)direction * gravity - flow * (1 - gravity);
             }
             return flow;
         }
