@@ -29,7 +29,7 @@ namespace FlowFields
                     Vector pos = new Vector(x, y);
                     for (int i = 0; i < Items.Count; i++)
                     {
-                        vectorField[x, y] = Items[i].Modify(vectorField[x, y], pos);
+                        vectorField[x, y] = Items[i].Modify(vectorField[x, y], pos).Normalize();
                     }
                 }
             }
