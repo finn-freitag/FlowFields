@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DisappearingParticleHolder.cs" />
     <Compile Include="SmoothParticleHolder.cs" />
     <Compile Include="AngleVector.cs" />
     <Compile Include="FlowDirection.cs" />

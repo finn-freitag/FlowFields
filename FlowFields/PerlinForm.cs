@@ -38,7 +38,7 @@ namespace FlowFields
             pictureBox1.Image = bmp;
             baseBmp = bmp;
 
-            particleHolder = new SmoothParticleHolder(300, pictureBox1.Width, pictureBox1.Height);
+            particleHolder = new DisappearingParticleHolder(300, pictureBox1.Width, pictureBox1.Height) { Color = Color.FromArgb(255, 0, 0) };
 
             timer = new Timer();
             timer.Enabled = false;
