@@ -30,6 +30,8 @@ namespace FlowFields
             {
                 g.FillEllipse(Brush, (float)(particles[i].X - Radius), (float)(particles[i].Y - Radius), width, width);
             }
+            g.Flush();
+            g.Dispose();
         }
     }
 }

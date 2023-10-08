@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
@@ -17,7 +19,8 @@ namespace FlowFields
         ParticleHolder particleHolder;
         Bitmap baseBmp = null;
 
-        Timer timer;
+        System.Windows.Forms.Timer timer;
+        Thread t;
 
         public PerlinForm()
         {
@@ -40,16 +43,30 @@ namespace FlowFields
 
             particleHolder = new DisappearingParticleHolder(300, pictureBox1.Width, pictureBox1.Height) { Brush = HSLBrush.CreateBrush(flowField) };
 
-            timer = new Timer();
+            timer = new System.Windows.Forms.Timer();
             timer.Enabled = false;
-            timer.Interval = 500;
+            timer.Interval = 50;
             timer.Tick += Timer_Tick;
+
+            if (flowField.Animate)
+            {
+                t = new Thread(new ThreadStart(AnimationThread));
+                t.Priority = ThreadPriority.Highest;
+                t.Start();
+            }
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (flowField.Animate) flowField.RenderFlowVectors(1);
-            for (int i = 0; i < 3; i++) makeStep();
+            for (int i = 0; i < 5; i++) makeStep();
+        }
+
+        private void AnimationThread()
+        {
+            while (Thread.CurrentThread.ThreadState == ThreadState.Running)
+            {
+                flowField.RenderFlowVectors(1);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -60,15 +77,25 @@ namespace FlowFields
         private void makeStep()
         {
             particleHolder.MoveParticles(flowField, 1.5);
-            Bitmap bmp = (Bitmap)baseBmp.Clone();
+            Bitmap bmp;
             if (!checkBox2.Checked) bmp = new Bitmap(pictureBox1.Image);
+            else bmp = (Bitmap)baseBmp.Clone();
             particleHolder.RenderParticles(ref bmp);
-            pictureBox1.Image = bmp;
+            try
+            {
+                pictureBox1.Image = bmp;
+            }
+            catch { }
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             timer.Enabled = checkBox1.Checked;
+        }
+
+        private void PerlinForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            t.Abort();
         }
     }
 }

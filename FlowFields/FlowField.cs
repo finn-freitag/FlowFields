@@ -12,7 +12,7 @@ namespace FlowFields
         public readonly int Width;
         public readonly int Height;
 
-        public VectorBase[,] vectorField { get; }
+        public VectorBase[,] vectorField { get; protected set; }
 
         public FlowField(int width, int height)
         {

@@ -14,7 +14,7 @@ namespace FlowFields
         public int octaves = 1;
         public int randomSeed = 123;
         public bool Animate = false;
-        public double VariationSpeed = 5;
+        public double VariationSpeed = 10;
         private double zCoord = 1;
 
         public PerlinNoiseFlowField(int width, int height) : base(width, height)
