@@ -91,6 +91,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "PerlinForm";
             this.Text = "PerlinForm";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Shown += new System.EventHandler(this.PerlinForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

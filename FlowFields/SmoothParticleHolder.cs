@@ -12,7 +12,7 @@ namespace FlowFields
         public SmoothParticleHolder(int particleCount, int Width, int Height) : base(particleCount, Width, Height)
         {
             Radius = 1;
-            Color = Color.FromArgb(1, 255, 0, 0);
+            Brush = new SolidBrush(Color.FromArgb(1, 255, 0, 0));
         }
 
         public override void MoveParticles(FlowField flowField, double speed)

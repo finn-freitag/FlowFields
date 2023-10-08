@@ -38,7 +38,7 @@ namespace FlowFields
             pictureBox1.Image = bmp;
             baseBmp = bmp;
 
-            particleHolder = new DisappearingParticleHolder(300, pictureBox1.Width, pictureBox1.Height) { Color = Color.FromArgb(255, 0, 0) };
+            particleHolder = new DisappearingParticleHolder(300, pictureBox1.Width, pictureBox1.Height) { Brush = HSLBrush.CreateBrush(flowField) };
 
             timer = new Timer();
             timer.Enabled = false;
@@ -48,7 +48,7 @@ namespace FlowFields
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            for (int i = 0; i < 10; i++) makeStep();
+            for (int i = 0; i < 3; i++) makeStep();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -58,7 +58,7 @@ namespace FlowFields
 
         private void makeStep()
         {
-            particleHolder.MoveParticles(flowField, 1);
+            particleHolder.MoveParticles(flowField, 1.5);
             Bitmap bmp = (Bitmap)baseBmp.Clone();
             if (!checkBox2.Checked) bmp = new Bitmap(pictureBox1.Image);
             particleHolder.RenderParticles(ref bmp);
