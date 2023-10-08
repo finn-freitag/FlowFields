@@ -25,7 +25,7 @@ namespace FlowFields
             Vector size = new Vector(Width, Height);
             for (int i = 0; i < particles.Count; i++)
             {
-                particles[i] = (particles[i] + flowField.vectorField[(int)particles[i].X, (int)particles[i].Y] * speed + size) % size;
+                particles[i] = (particles[i] + flowField.vectorField[(int)particles[i].X, (int)particles[i].Y].GetVector() * speed + size) % size;
             }
         }
 

@@ -26,7 +26,7 @@ namespace FlowFields
 
         private void PerlinForm_Shown(object sender, EventArgs e)
         {
-            flowField = new PerlinNoiseFlowField(pictureBox1.Width, pictureBox1.Height);
+            flowField = new PerlinNoiseFlowField(pictureBox1.Width, pictureBox1.Height) { Animate = true };
             flowField.RenderFlowVectors();
 
             Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
@@ -42,12 +42,13 @@ namespace FlowFields
 
             timer = new Timer();
             timer.Enabled = false;
-            timer.Interval = 50;
+            timer.Interval = 500;
             timer.Tick += Timer_Tick;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
+            if (flowField.Animate) flowField.RenderFlowVectors(1);
             for (int i = 0; i < 3; i++) makeStep();
         }
 

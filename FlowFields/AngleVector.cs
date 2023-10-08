@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FlowFields
 {
-    public struct AngleVector
+    public struct AngleVector : VectorBase
     {
         public double angle;
         public double length;
@@ -25,6 +25,16 @@ namespace FlowFields
         public static AngleVector GetRandomNormalizedVector()
         {
             return new AngleVector(Random.Get(360), 1);
+        }
+
+        public Vector GetVector()
+        {
+            return (Vector)this;
+        }
+
+        public AngleVector GetAngleVector()
+        {
+            return this;
         }
 
         public static explicit operator AngleVector(double angle)

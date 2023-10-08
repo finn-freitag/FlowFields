@@ -12,13 +12,13 @@ namespace FlowFields
         public readonly int Width;
         public readonly int Height;
 
-        public Vector[,] vectorField { get; }
+        public VectorBase[,] vectorField { get; }
 
         public FlowField(int width, int height)
         {
             this.Width = width;
             this.Height = height;
-            vectorField = new Vector[width, height];
+            vectorField = new VectorBase[width, height];
         }
 
         public void RenderFlowVectors()
@@ -41,7 +41,7 @@ namespace FlowFields
                     int vy = y + size / 2;
                     if (vx <= bmp.Width && vy <= bmp.Height)
                     {
-                        AngleVector v = (AngleVector)vectorField[vx, vy];
+                        AngleVector v = vectorField[vx, vy].GetAngleVector();
                         v.length = size / 2;
                         Vector v2 = (Vector)v;
                         Vector pos = new Vector(x + 1, y + 1);

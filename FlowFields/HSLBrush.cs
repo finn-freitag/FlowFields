@@ -16,7 +16,7 @@ namespace FlowFields
             {
                 for(int x = 0; x < flowField.Width; x++)
                 {
-                    bmp.SetPixel(x, y, ToRGB(((AngleVector)flowField.vectorField[x, y]).angle, 100, 50));
+                    bmp.SetPixel(x, y, ToRGB((flowField.vectorField[x, y]).GetAngleVector().angle, 100, 50));
                 }
             }
             return new TextureBrush(bmp);

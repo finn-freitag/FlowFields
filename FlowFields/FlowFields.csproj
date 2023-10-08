@@ -83,6 +83,7 @@
     <Compile Include="Random.cs" />
     <Compile Include="TangentGravityPoint.cs" />
     <Compile Include="Vector.cs" />
+    <Compile Include="VectorBase.cs" />
     <EmbeddedResource Include="FormSelector.resx">
       <DependentUpon>FormSelector.cs</DependentUpon>
     </EmbeddedResource>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FlowFields
 {
-    public struct Vector
+    public struct Vector : VectorBase
     {
         public static readonly Vector Zero = new Vector(0, 0);
 
@@ -31,6 +31,16 @@ namespace FlowFields
         public double GetLength()
         {
             return Maths.GetDistance(Vector.Zero, this);
+        }
+
+        public Vector GetVector()
+        {
+            return this;
+        }
+
+        public AngleVector GetAngleVector()
+        {
+            return (AngleVector)this;
         }
 
         public static explicit operator Vector(AngleVector vec)
