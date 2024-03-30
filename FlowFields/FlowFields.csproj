@@ -46,8 +46,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChargedParticle.cs" />
+    <Compile Include="ChargedParticleFlowField.cs" />
+    <Compile Include="ChargedParticleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChargedParticleForm.Designer.cs">
+      <DependentUpon>ChargedParticleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DisappearingParticleHolder.cs" />
     <Compile Include="HSLBrush.cs" />
+    <Compile Include="PixelHolder.cs" />
+    <Compile Include="PixelHolderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PixelHolderForm.Designer.cs">
+      <DependentUpon>PixelHolderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SmoothParticleHolder.cs" />
     <Compile Include="AngleVector.cs" />
     <Compile Include="FlowDirection.cs" />
@@ -84,6 +99,9 @@
     <Compile Include="TangentGravityPoint.cs" />
     <Compile Include="Vector.cs" />
     <Compile Include="VectorBase.cs" />
+    <EmbeddedResource Include="ChargedParticleForm.resx">
+      <DependentUpon>ChargedParticleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormSelector.resx">
       <DependentUpon>FormSelector.cs</DependentUpon>
     </EmbeddedResource>
@@ -92,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PerlinForm.resx">
       <DependentUpon>PerlinForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PixelHolderForm.resx">
+      <DependentUpon>PixelHolderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

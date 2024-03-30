@@ -9,12 +9,12 @@ namespace FlowFields
     public class PerlinNoiseFlowField : FlowField // https://github.com/samhooke/PerlinNoise/blob/master/Noise.cs
     {
         public double persistence = 1;
-        public double frequency = 0.01;
+        public double frequency = 0.015;
         private double amplitude = 360;
         public int octaves = 1;
         public int randomSeed = 123;
         public bool Animate = false;
-        public double VariationSpeed = 10;
+        public double VariationSpeed = 80;
         private double zCoord = 1;
 
         public PerlinNoiseFlowField(int width, int height) : base(width, height)

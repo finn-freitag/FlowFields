@@ -4,41 +4,44 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace FlowFields
 {
-    public partial class PerlinForm : Form
+    public partial class ChargedParticleForm : Form
     {
-        PerlinNoiseFlowField flowField;
+        ChargedParticleFlowField flowField;
         ParticleHolder particleHolder;
         Bitmap baseBmp = null;
 
         System.Windows.Forms.Timer timer;
-        Thread t;
 
-        public PerlinForm()
+        public ChargedParticleForm()
         {
             InitializeComponent();
             Thread.CurrentThread.Priority = ThreadPriority.AboveNormal;
         }
 
-        private void PerlinForm_Shown(object sender, EventArgs e)
+        private void ChargedParticleForm_Shown(object sender, EventArgs e)
         {
-            flowField = new PerlinNoiseFlowField(pictureBox1.Width, pictureBox1.Height) { Animate = true };
+            flowField = new ChargedParticleFlowField(pictureBox1.Width, pictureBox1.Height);
+            flowField.ChargedParticles = new List<ChargedParticle>()
+            {
+                new ChargedParticle(new Vector(200, 200), true),
+                new ChargedParticle(new Vector(500, 200), true),
+                //new ChargedParticle(new Vector(350, 350), true),
+            };
             flowField.RenderFlowVectors();
 
             Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             Graphics g = Graphics.FromImage(bmp);
-            g.Clear(Color.White);
+            g.Clear(Color.Black);
             g.Flush();
             g.Dispose();
-            //flowField.RenderFlowVectorsToBitmap(ref bmp, 10, Color.White);
+            flowField.RenderFlowVectorsToBitmap(ref bmp, 10, Color.White);
             pictureBox1.Image = bmp;
             baseBmp = bmp;
 
@@ -48,31 +51,11 @@ namespace FlowFields
             timer.Enabled = false;
             timer.Interval = 50;
             timer.Tick += Timer_Tick;
-
-            if (flowField.Animate)
-            {
-                t = new Thread(new ThreadStart(AnimationThread));
-                t.Priority = ThreadPriority.Highest;
-                t.Start();
-            }
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
             for (int i = 0; i < 5; i++) makeStep();
-        }
-
-        private void AnimationThread()
-        {
-            while (Thread.CurrentThread.ThreadState == ThreadState.Running)
-            {
-                flowField.RenderFlowVectors(1);
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            makeStep();
         }
 
         private void makeStep()
@@ -82,21 +65,12 @@ namespace FlowFields
             if (!checkBox2.Checked) bmp = new Bitmap(pictureBox1.Image);
             else bmp = (Bitmap)baseBmp.Clone();
             particleHolder.RenderParticles(ref bmp);
-            try
-            {
-                pictureBox1.Image = bmp;
-            }
-            catch { }
+            pictureBox1.Image = bmp;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             timer.Enabled = checkBox1.Checked;
-        }
-
-        private void PerlinForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            t.Abort();
         }
     }
 }

@@ -20,8 +20,16 @@ namespace FlowFields
             Vector size = new Vector(Width, Height);
             for (int i = 0; i < particles.Count; i++)
             {
-                particles[i] = particles[i] + flowField.vectorField[(int)particles[i].X, (int)particles[i].Y].GetVector() * speed;
-                if (particles[i].X < 0 || particles[i].Y < 0 || particles[i].X >= Width || particles[i].Y >= Height)
+                while (particles[i].X == float.NaN || particles[i].Y == float.NaN)
+                    particles[i] = new PointF((float)Random.Get(Width), (float)Random.Get(Height));
+                try
+                {
+                    particles[i] = particles[i] + flowField.vectorField[(int)particles[i].X, (int)particles[i].Y].GetVector() * speed;
+                    if (particles[i].X < 0 || particles[i].Y < 0 || particles[i].X >= Width || particles[i].Y >= Height)
+                        particles[i] = new PointF((float)Random.Get(Width), (float)Random.Get(Height));
+                }
+                catch { }
+                while (particles[i].X == float.NaN || particles[i].Y == float.NaN) 
                     particles[i] = new PointF((float)Random.Get(Width), (float)Random.Get(Height));
             }
         }
