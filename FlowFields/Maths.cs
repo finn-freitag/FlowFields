@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,13 @@ namespace FlowFields
         public static double GetDistance(Vector p1, Vector p2)
         {
             double res = Math.Sqrt(Math.Pow(GetDistance(p1.x, p2.x), 2) + Math.Pow(GetDistance(p1.y, p2.y), 2));
+            if (GetDistance(res, res - Math.Round(res)) < CalculationDeviation) res = Math.Round(res);
+            return res;
+        }
+
+        public static double GetDistance(PointF p1, PointF p2)
+        {
+            double res = Math.Sqrt(Math.Pow(GetDistance(p1.X, p2.X), 2) + Math.Pow(GetDistance(p1.Y, p2.Y), 2));
             if (GetDistance(res, res - Math.Round(res)) < CalculationDeviation) res = Math.Round(res);
             return res;
         }

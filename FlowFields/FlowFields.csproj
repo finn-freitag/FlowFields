@@ -56,6 +56,12 @@
     </Compile>
     <Compile Include="DisappearingParticleHolder.cs" />
     <Compile Include="HSLBrush.cs" />
+    <Compile Include="NetAnimationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NetAnimationForm.Designer.cs">
+      <DependentUpon>NetAnimationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PixelHolder.cs" />
     <Compile Include="PixelHolderForm.cs">
       <SubType>Form</SubType>
@@ -107,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NetAnimationForm.resx">
+      <DependentUpon>NetAnimationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PerlinForm.resx">
       <DependentUpon>PerlinForm.cs</DependentUpon>
